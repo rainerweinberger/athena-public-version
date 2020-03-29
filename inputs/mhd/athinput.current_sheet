@@ -1,0 +1,55 @@
+<comment>
+problem   = MHD current sheet
+reference = "Gardiner+Stone 2005"
+configure = --prob=current_sheet -b --flux hlld -hdf5
+
+<job>
+problem_id = current_sheet  # problem ID: basename of output filenames
+
+<output1>
+file_type  = hst             # History data dump
+dt         = 0.1             # time increment between outputs
+
+<output2>
+file_type  = vtk             # Binary data dump
+variable   = prim            # variables to be output
+dt         = 1               # time increment between outputs
+
+<output3>
+file_type  = hdf5            # HDF5 data dump
+variable   = prim            # variables to be output
+dt         = 1               # time increment between outputs
+
+<time>
+cfl_number = 0.3             # The Courant, Friedrichs, & Lewy (CFL) Number
+nlim       = 1000000         # cycle limit
+tlim       = 40.0            # time limit
+integrator  = vl2            # time integration algorithm
+xorder      = 2              # order of spatial reconstruction
+ncycle_out  = 1              # interval for stdout summary info
+
+<mesh>
+nx1        = 256             # Number of zones in X1-direction
+x1min      = -1.0            # minimum value of X1
+x1max      =  1.0            # maximum value of X1
+ix1_bc     = periodic        # inner-X1 boundary flag
+ox1_bc     = periodic        # inner-X1 boundary flag
+
+nx2        = 256             # Number of zones in X2-direction
+x2min      = -1.0            # minimum value of X2
+x2max      = 1.0             # maximum value of X2
+ix2_bc     = periodic        # inner-X2 boundary flag
+ox2_bc     = periodic        # inner-X2 boundary flag
+
+nx3        = 1               # Number of zones in X3-direction
+x3min      = -0.5            # minimum value of X3
+x3max      = 0.5             # maximum value of X3
+ix3_bc     = periodic        # inner-X3 boundary flag
+ox3_bc     = periodic        # inner-X3 boundary flag
+
+<hydro> 
+gamma           = 1.6666667  # gamma = C_p/C_v
+
+<problem>
+amp   = 0.1
+b0    = 1.0
